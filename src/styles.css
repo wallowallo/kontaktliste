@@ -1,1 +1,73 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+
+body {
+  background-color: grey;
+}
+
+md-card.kontaktCard.mat-card {
+  box-shadow: none;
+  padding-top: 0;
+}
+
+h1 {
+  margin-bottom: 40px;
+}
+
+.kontaktListe {
+  width: 60%;
+  margin: auto;
+}
+
+.popupFormButton {
+  float: right;
+}
+
+.logOutButton {
+  float: right;
+}
+
+.kontaktHeader {
+  width: 95%;
+  margin: auto;
+}
+
+.listItem:hover .buttons {
+  color: green !important;
+  display: block;
+}
+
+.listItem .buttons,.listItem .deleteButton {
+  display: none;
+}
+
+.listItem:hover .deleteButton {
+  color: red;
+  display: block;
+}
+
+.loginCard {
+  width: 30%;
+  margin:  40px auto 0 auto;
+}
+
+h1.loginH1 {
+  text-align: center;
+}
+
+md-input-container.mat-input-container {
+  display: flex;
+  margin: auto;
+  max-width: 70%;
+}
+
+button.loginButton {
+  margin: auto;
+  display: flex;
+}
+
+.loadingCircle {
+  display: flex;
+  max-width: 15%;
+  margin: 20px auto;
+}

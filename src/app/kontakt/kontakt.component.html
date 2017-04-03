@@ -1,0 +1,135 @@
+<md-card class="kontaktHeader">
+  <md-card-title>
+    Velkommen {{currentUser}}!
+    <button md-raised-button class="logOutButton" [routerLink]="['/']">Log out</button>
+  </md-card-title>
+</md-card>
+
+<popup #popup1>
+  <form #nyKontaktForm="ngForm" (ngSubmit)="nyKontakt(nyKontaktForm)">
+    <md-card class="kontaktCard">
+
+      <md-card-content>
+        <md-card-title>Navn og adresse:</md-card-title>
+
+        <md-input-container>
+            <input mdInput type='text' name="name" placeholder="Navn" ngModel autofocus>
+        </md-input-container>
+
+        <md-input-container>
+            <input mdInput type='text' name="adressLine1" placeholder="Adresse" ngModel>
+        </md-input-container>
+
+        <md-input-container>
+          <input mdInput type='text' placeholder='adresse2' name="AdressLine2" ngModel>
+        </md-input-container>
+
+        <md-input-container>
+            <input mdInput type='text' name="adressLine3" placeholder="Adresse3" ngModel>
+        </md-input-container>
+      </md-card-content>
+
+      <md-card-content>
+        <md-input-container>
+            <input mdInput type='text' name="city" placeholder="By" ngModel>
+        </md-input-container>
+
+        <md-input-container>
+          <input mdInput type='text' placeholder='Land' name="country" ngModel>
+        </md-input-container>
+
+        <md-input-container>
+            <input mdInput type='text' name="countryCode" placeholder="Landskode" ngModel>
+        </md-input-container>
+
+        <md-input-container>
+            <input mdInput type='number' name="postalCode" placeholder="Post nummer" ngModel>
+        </md-input-container>
+      </md-card-content>
+
+      <md-card-content>
+        <md-card-title>Telefon:</md-card-title>
+
+        <md-input-container>
+          <input mdInput type='number' placeholder='Landskode' name="countryCodePhone" ngModel>
+        </md-input-container>
+
+        <md-input-container>
+            <input mdInput type='text' name="description" placeholder="Type tlf nummer" ngModel>
+        </md-input-container>
+
+        <md-input-container>
+            <input mdInput type='number' name="number" placeholder="Tlf nummer" ngModel>
+        </md-input-container>
+      </md-card-content>
+
+      <md-card-content>
+        <md-card-title>Email:</md-card-title>
+
+        <md-input-container>
+            <input mdInput type='email' name="emailAdress" placeholder="Email" ngModel>
+        </md-input-container>
+      </md-card-content>
+
+      <md-card-content>
+        <md-card-title>Kommentar:</md-card-title>
+
+        <md-input-container>
+          <textarea mdInput row="3" type='text' placeholder='Kommentar' name="comment" ngModel></textarea>
+        </md-input-container>
+      </md-card-content>
+
+      <md-card-content>
+        <button md-raised-button type='submit'>Legg til ny bruker</button>
+        <button md-raised-button id="cancelBtn" [ngClass]="cancelBtnStyle" type="reset" (click)="lukkPopup()">Lukk</button>
+      </md-card-content>
+    </md-card>
+  </form>
+</popup>
+
+
+
+<md-list class="kontaktListe">
+    <md-card>
+      <h1>
+        {{currentUser}}´s Kontakter:
+        <button md-raised-button class="popupFormButton" (click)="popupForm()">Ny Kontakt</button>
+      </h1>
+
+      <md-card-content>
+        <form #oppdaterKontaktForm="ngForm" (ngSubmit)="oppdaterKontakt(oppdaterKontaktForm)">
+
+          <md-list-item class="listItem" *ngFor="let kontakt of kontakter let i = index">
+
+            <span md-line>Name:
+              <span *ngIf="!kontakt.isEdit"> {{kontakt.Info.Name}}</span>
+              <input *ngIf="kontakt.isEdit" mdInput [(ngModel)]="kontakt.Info.Name" type='text' name="name" ngModel autofocus>
+            </span>
+
+            <span md-line>Telefon:
+              <span *ngIf="!kontakt.isEdit"> {{kontakt.Info.DefaultPhone.Number}}</span>
+              <input *ngIf="kontakt.isEdit" mdInput [(ngModel)]="kontakt.Info.DefaultPhone.Number" type='number' name="nummer" ngModel>
+            </span>
+
+            <span md-line>Email:
+              <span *ngIf="!kontakt.isEdit"> {{kontakt.Info.DefaultEmail.EmailAddress}}</span>
+              <input *ngIf="kontakt.isEdit" mdInput [(ngModel)]="kontakt.Info.DefaultEmail.EmailAddress" type='email' name="email" ngModel>
+            </span>
+
+            <span md-line>ID:
+              <span *ngIf="!kontakt.isEdit"> {{kontakt.ID}}</span>
+              <input *ngIf="kontakt.isEdit" mdInput type='number' [(ngModel)]="kontakt.ID" name="id" ngModel>
+            </span>
+
+            <button *ngIf="kontakt.isEdit" md-raised-button (click)="kanselerRedigeringKontakt(kontakt)">Kanseler</button>
+
+            <button *ngIf="kontakt.isEdit" md-raised-button type="submit">Oppdater</button>
+
+            <button class="buttons" *ngIf="!kontakt.isEdit" md-raised-button (click)="redigerKontakt(kontakt)">Rediger</button>
+
+            <button class="deleteButton" *ngIf="!kontakt.isEdit" md-raised-button (click)='slettKontakt(kontakt.ID, this.kontakter.splice(this.i,1))'>Slett</button>
+          </md-list-item>
+        </form>
+      </md-card-content>
+    </md-card>
+  </md-list>

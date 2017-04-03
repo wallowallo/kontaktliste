@@ -1,0 +1,25 @@
+<form #LogInForm="ngForm" (ngSubmit)="logIn(LogInForm)">
+  <md-card class="loginCard">
+    <md-card-content>
+
+      <h1 class="loginH1">
+        Log in:
+      </h1>
+
+      <md-input-container>
+          <input mdInput type='text' name="username" placeholder="Brukernavn" ngModel required autofocus>
+      </md-input-container>
+    </md-card-content>
+
+    <md-card-content>
+      <md-input-container>
+        <input mdInput type='password' name="password" placeholder="Passord" ngModel required>
+      </md-input-container>
+    </md-card-content>
+
+    <md-card-content>
+      <button md-raised-button type='submit' [disabled]="loading" class="loginButton">Log in</button>
+       <img class="loadingCircle" *ngIf="loading" src="../assets/loader.gif">
+    </md-card-content>
+  </md-card>
+</form>
